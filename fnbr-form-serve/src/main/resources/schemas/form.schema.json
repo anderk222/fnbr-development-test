@@ -1,0 +1,169 @@
+{
+	"definitions": {},
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://example.com/object1700949112.json",
+	"title": "Root",
+	"type": "object",
+	"required": [
+		"name",
+		"lastname",
+		"email",
+		"phone",
+		"address",
+		"program",
+		"terms"
+	],
+	"properties": {
+		"id": {
+			"$id": "#root/id",
+			"title": "Id",
+			"type": "integer",
+			"examples": [
+				0
+			],
+			"minimum": 0,
+			"default": 0
+		},
+		"name": {
+			"$id": "#root/name",
+			"title": "Name",
+			"type": "string",
+			"default": "",
+			"examples": [
+				"string"
+			],
+			"maxLength": 70,
+			"minLength": 2
+		},
+		"lastname": {
+			"$id": "#root/lastname",
+			"title": "Lastname",
+			"type": "string",
+			"default": "",
+			"examples": [
+				"string"
+			],
+			"maxLength": 70,
+			"minLength": 2
+		},
+		"email": {
+			"$id": "#root/email",
+			"title": "Email",
+			"type": "string",
+			"default": "",
+			"examples": [
+				"string"
+			],
+			"format": "email"
+		},
+		"phone": {
+			"$id": "#root/phone",
+			"title": "Phone",
+			"type": "string",
+			"default": "",
+			"examples": [
+				"string"
+			],
+			"pattern": "^[+]?[0-9]{1,15}$",
+			"message": {
+				"pattern": "phone number must have this format +593991104623"
+			}
+		},
+		"comments": {
+			"$id": "#root/comments",
+			"title": "Comments",
+			"type": "string",
+			"default": "",
+			"examples": [
+				"string"
+			]
+		},
+		"address": {
+			"$id": "#root/address",
+			"title": "Address",
+			"type": "object",
+			"required": [
+				"country",
+				"state",
+				"city"
+			],
+			"properties": {
+				"country": {
+					"$id": "#root/address/country",
+					"title": "Country",
+					"type": "string",
+					"default": "",
+					"examples": [
+						"string"
+					],
+					"maxLength": 150,
+					"minLength": 2
+				},
+				"state": {
+					"$id": "#root/address/state",
+					"title": "State",
+					"type": "string",
+					"default": "",
+					"examples": [
+						"string"
+					],
+					"maxLength": 30,
+					"minLength": 2
+				},
+				"city": {
+					"$id": "#root/address/city",
+					"title": "City",
+					"type": "string",
+					"default": "",
+					"examples": [
+						"string"
+					],
+					"maxLength": 30,
+					"minLength": 1
+				}
+			}
+		},
+		"program": {
+			"$id": "#root/program",
+			"title": "Program",
+			"type": "object",
+			"required": [
+				"id",
+				"name"
+			],
+			"properties": {
+				"id": {
+					"$id": "#root/program/id",
+					"title": "Id",
+					"type": "integer",
+					"examples": [
+						1
+					],
+					"default": 0,
+					"minimum": 1
+				},
+				"name": {
+					"$id": "#root/program/name",
+					"title": "Name",
+					"type": "string",
+					"default": "",
+					"examples": [
+						"string"
+					]
+				}
+			}
+		},
+		"terms": {
+			"$id": "#root/terms",
+			"title": "Terms",
+			"type": "boolean",
+			"examples": [
+				true
+			],
+			"enum": [true],
+			"message":{
+				"enum": "You must accpet privacy and policy terms"
+			}
+		}
+	}
+}

@@ -1,0 +1,13 @@
+<span class="p-fluid">
+    <p-autoComplete class="h-10"
+    [required]="true"
+    [forceSelection]="true"  
+    [suggestions]="items" 
+    (completeMethod)="search($event)"
+    field="name"
+    (onSelect)="onSelect.emit($event)"
+    [disabled]="disabled"
+    >
+    
+    </p-autoComplete>
+</span>

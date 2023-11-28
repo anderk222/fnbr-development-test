@@ -1,0 +1,11 @@
+<span class="p-fluid">
+    <p-autoComplete class="h-10"
+    [suggestions]="filtered"
+    field="name"
+    (onSelect)="onSelect.emit($event)"
+    [disabled]="areaId==0"
+    (completeMethod)="search($event)"
+    [dropdown]="true"
+    >
+    </p-autoComplete>
+</span> 

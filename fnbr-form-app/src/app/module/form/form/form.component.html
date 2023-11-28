@@ -1,0 +1,173 @@
+<form [formGroup]="form" class="text-xs flex flex-col gap-4 pb-2" (submit)="handlerSave()">
+    <h1 class="text-xl text-blue-700">Request Information</h1>
+    <div class="flex w-full md:flex-row flex-col gap-2">
+
+        <div class="flex w-full flex-col gap-2">
+            <label htmlFor="email">Khowledge Area*</label>
+            <app-fnbr-area-input-filter
+            (onSelect)="handlerSelectArea($event)"
+            ></app-fnbr-area-input-filter>
+        </div>
+
+        <div class="flex w-full flex-col gap-2">
+            <label htmlFor="email">Program*</label>
+            <app-fnbr-program-input-filter
+            [areaId]="areaId.value"
+            (onSelect)="handlerSelectProgram($event)"></app-fnbr-program-input-filter>
+        </div>
+
+    </div>
+    <div class="flex w-full md:flex-row flex-col gap-2">
+
+        <div [ngClass]="{'text-red-500': name.invalid && (name.touched || name.dirty)}"
+            class="flex w-full flex-col gap-2">
+            <label htmlFor="username">Names*</label>
+            <input
+            [formControl]="name" id="name" class="h-10 border text-red-500 w-full" pInputText placeholder="Names" />
+           
+            <div *ngIf="name.invalid && (name.touched || name.dirty)" class="flex text-xs flex-col">
+                <p *ngIf="name.errors?.['minlength']">
+                    Name must have min 2 characteres
+                </p>
+                <p *ngIf="name.errors?.['maxlength']">
+                    Name must have max 60 characteres
+                </p>
+                <p *ngIf="name.errors?.['required']">
+                    Name is required
+                </p>
+
+            </div>
+        </div>
+        <div [ngClass]="{'text-red-500': lastname.invalid && (lastname.touched || lastname.dirty)}"
+            class="flex w-full flex-col gap-2">
+            <label htmlFor="lasname">Apellidos*</label>
+            <input [formControl]="lastname" id="lastname" class="h-10 w-full" pInputText placeholder="Lastnames" />
+         
+            <div *ngIf="lastname.invalid && (lastname.touched || lastname.dirty)" class="flex flex-col">
+
+                <p *ngIf="lastname.errors?.['minlength']">
+                    Last name must have min 2 characteres
+                </p>
+                <p *ngIf="lastname.errors?.['maxlength']">
+                    Last name must have max 60 characteres
+                </p>
+                <p *ngIf="lastname.errors?.['required']">
+                    Last name is required
+                </p>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="flex w-full md:flex-row flex-col gap-2">
+        <div [ngClass]="{'text-red-500': email.invalid && (email.touched || email.dirty)}"
+            class="flex w-full flex-col gap-2">
+            <label htmlFor="email">E-mail*</label>
+            <input [formControl]="email" id="email" class="h-10 w-full" pInputText placeholder="E-mail" />
+
+            <div *ngIf="email.invalid && (email.touched || email.dirty)" class="flex flex-col text-xs">
+
+                <p *ngIf="email.errors?.['email']">
+                    Email must have email format
+                </p>
+
+                <p *ngIf="email.errors?.['required']">
+                    Email is required
+                </p>
+
+            </div>
+
+        </div>
+        <div [ngClass]="{'text-red-500': phone.invalid && (phone.touched || phone.dirty)}"
+            class="flex w-full flex-col gap-2">
+            <label htmlFor="phone">Phone*</label>
+            <input [formControl]="phone" id="phone" class="h-10 w-full" pInputText placeholder="+593991104623" />
+
+            <div *ngIf="phone.invalid && (phone.touched || phone.dirty)" class="flex w-full text-xs flex-col">
+          
+                <p *ngIf="phone.errors?.['minlength']">
+                    Phone number must have min 10 characteres
+                </p>
+                <p *ngIf="phone.errors?.['maxlength']">
+                    Phone number  must have max 15 characteres
+                </p>
+
+                <p *ngIf="phone.errors?.['pattern']">
+                    Phone number must have international number format 
+                </p>
+                <p *ngIf="phone.errors?.['required']">
+                    Phone number is required
+                </p>
+
+            </div>
+        </div>
+
+
+    </div>
+    <div class="flex w-full md:flex-row flex-col gap-2">
+
+        <div [ngClass]="{'text-red-500': country.invalid && (country.touched || country.dirty)}" class="flex w-full flex-col gap-2">
+            <label htmlFor="email">Country*</label>
+            <app-fnbr-country-input-filter
+            (onSelect)="handlerSelectCountry($event)"
+            ></app-fnbr-country-input-filter>
+            <div *ngIf="country.invalid && (country.touched || country.dirty)" class="flex flex-col text-xs w-full">
+
+            </div>
+        </div>
+
+        <div 
+        [ngClass]="{'text-red-500': state.invalid && (state.touched || state.dirty)}"
+        class="flex w-full flex-col gap-2">
+            <label htmlFor="email">State*</label>
+            <app-fnbr-state-input-filter
+            [areaId]="countryId.value"
+            (onSelect)="hanlderSelectState($event)"
+            ></app-fnbr-state-input-filter>
+            
+            <div *ngIf="state.invalid && (state.touched || state.dirty)" class="flex text-xs flex-col w-full">
+
+            </div>
+        </div>
+
+        <div
+        [ngClass]="{'text-red-500': city.invalid && (city.touched || city.dirty)}"
+        class="flex w-full flex-col gap-2">
+            <label htmlFor="email">City*</label>
+            <app-fnbr-city-input-filter
+            [areaId]="stateId.value"
+            (onSelect)="handlerSelectCity($event)"
+            ></app-fnbr-city-input-filter>
+
+            <div *ngIf="city.invalid && (city.touched || city.dirty)" class="flex flex-col text-xs w-full">
+
+            </div>
+        </div>
+
+    </div>
+    <div class="flex w-full flex-col gap-2">
+        <label htmlFor="comment">Comments</label>
+        <textarea [formControl]="comments" id="comment" rows="5" cols="30" pInputTextarea
+            placeholder="Comment"></textarea>
+        <small id="phone-help">Write a comment if it's necessary.</small>
+
+    </div>
+    <div class="flex flex-col">
+        <div class="flex items-center gap-1">
+            <p-checkbox [binary]="true" [formControl]="terms"></p-checkbox>
+            <label for="ny">I accept the <span class="text-blue-500">privacy policy</span></label>
+        </div>
+        <div *ngIf="terms.invalid && (terms.touched || terms.dirty)" class="w-full flex flex-col">
+            <p *ngIf="terms.errors?.['requiredTrue']" class="text-xs text-red-500">
+                You must accept our privacy and policy
+            </p>
+        </div>
+  
+    </div>
+    <div class="card flex justify-center">
+        <p-button
+         [label]="loading ? 'Loading' :'Submit'"
+         
+         type="submit"></p-button>
+    </div>
+</form>
